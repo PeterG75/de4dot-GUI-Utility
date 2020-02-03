@@ -149,6 +149,7 @@
             // 
             // comboDeobfMethod
             // 
+            this.comboDeobfMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDeobfMethod.FormattingEnabled = true;
             this.comboDeobfMethod.Items.AddRange(new object[] {
             "delegate",
@@ -201,6 +202,7 @@
             // 
             // comboObfuscators
             // 
+            this.comboObfuscators.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboObfuscators.FormattingEnabled = true;
             this.comboObfuscators.Items.AddRange(new object[] {
             "Unknown",
