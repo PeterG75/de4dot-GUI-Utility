@@ -33,7 +33,7 @@
             this.cbEnableAdvStrings = new System.Windows.Forms.CheckBox();
             this.gbStringDecryption = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btn_AddDecryptionMethod = new System.Windows.Forms.Button();
+            this.btnAddDecryptionMethod = new System.Windows.Forms.Button();
             this.tbDecryptionMethod = new System.Windows.Forms.TextBox();
             this.lbDecryptionMethods = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,6 +41,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gbGeneral = new System.Windows.Forms.GroupBox();
+            this.cbUse64Bit = new System.Windows.Forms.CheckBox();
             this.comboObfuscators = new System.Windows.Forms.ComboBox();
             this.cbForceObf = new System.Windows.Forms.CheckBox();
             this.cbNoRenaming = new System.Windows.Forms.CheckBox();
@@ -58,7 +59,6 @@
             this.toolStripMenuDeleteBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbUse64Bit = new System.Windows.Forms.CheckBox();
             this.gbStringDecryption.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,11 +86,12 @@
             this.cbEnableAdvStrings.TabIndex = 1;
             this.cbEnableAdvStrings.Text = "Enable";
             this.cbEnableAdvStrings.UseVisualStyleBackColor = true;
+            this.cbEnableAdvStrings.CheckedChanged += new System.EventHandler(this.cbEnableAdvStrings_CheckedChanged);
             // 
             // gbStringDecryption
             // 
             this.gbStringDecryption.Controls.Add(this.label5);
-            this.gbStringDecryption.Controls.Add(this.btn_AddDecryptionMethod);
+            this.gbStringDecryption.Controls.Add(this.btnAddDecryptionMethod);
             this.gbStringDecryption.Controls.Add(this.tbDecryptionMethod);
             this.gbStringDecryption.Controls.Add(this.lbDecryptionMethods);
             this.gbStringDecryption.Controls.Add(this.label4);
@@ -112,18 +113,20 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Decryption methods";
             // 
-            // btn_AddDecryptionMethod
+            // btnAddDecryptionMethod
             // 
-            this.btn_AddDecryptionMethod.Location = new System.Drawing.Point(479, 192);
-            this.btn_AddDecryptionMethod.Name = "btn_AddDecryptionMethod";
-            this.btn_AddDecryptionMethod.Size = new System.Drawing.Size(58, 21);
-            this.btn_AddDecryptionMethod.TabIndex = 6;
-            this.btn_AddDecryptionMethod.Text = "Add";
-            this.btn_AddDecryptionMethod.UseVisualStyleBackColor = true;
-            this.btn_AddDecryptionMethod.Click += new System.EventHandler(this.btnAddDecryptionMethod_Click);
+            this.btnAddDecryptionMethod.Enabled = false;
+            this.btnAddDecryptionMethod.Location = new System.Drawing.Point(479, 192);
+            this.btnAddDecryptionMethod.Name = "btnAddDecryptionMethod";
+            this.btnAddDecryptionMethod.Size = new System.Drawing.Size(58, 21);
+            this.btnAddDecryptionMethod.TabIndex = 6;
+            this.btnAddDecryptionMethod.Text = "Add";
+            this.btnAddDecryptionMethod.UseVisualStyleBackColor = true;
+            this.btnAddDecryptionMethod.Click += new System.EventHandler(this.btnAddDecryptionMethod_Click);
             // 
             // tbDecryptionMethod
             // 
+            this.tbDecryptionMethod.Enabled = false;
             this.tbDecryptionMethod.Location = new System.Drawing.Point(6, 193);
             this.tbDecryptionMethod.Name = "tbDecryptionMethod";
             this.tbDecryptionMethod.Size = new System.Drawing.Size(466, 20);
@@ -131,6 +134,7 @@
             // 
             // lbDecryptionMethods
             // 
+            this.lbDecryptionMethods.Enabled = false;
             this.lbDecryptionMethods.FormattingEnabled = true;
             this.lbDecryptionMethods.Location = new System.Drawing.Point(6, 66);
             this.lbDecryptionMethods.Name = "lbDecryptionMethods";
@@ -150,6 +154,7 @@
             // comboDeobfMethod
             // 
             this.comboDeobfMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDeobfMethod.Enabled = false;
             this.comboDeobfMethod.FormattingEnabled = true;
             this.comboDeobfMethod.Items.AddRange(new object[] {
             "delegate",
@@ -200,9 +205,20 @@
             this.gbGeneral.TabStop = false;
             this.gbGeneral.Text = "General Settings";
             // 
+            // cbUse64Bit
+            // 
+            this.cbUse64Bit.AutoSize = true;
+            this.cbUse64Bit.Location = new System.Drawing.Point(6, 66);
+            this.cbUse64Bit.Name = "cbUse64Bit";
+            this.cbUse64Bit.Size = new System.Drawing.Size(79, 17);
+            this.cbUse64Bit.TabIndex = 9;
+            this.cbUse64Bit.Text = "64bit Mode";
+            this.cbUse64Bit.UseVisualStyleBackColor = true;
+            // 
             // comboObfuscators
             // 
             this.comboObfuscators.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboObfuscators.Enabled = false;
             this.comboObfuscators.FormattingEnabled = true;
             this.comboObfuscators.Items.AddRange(new object[] {
             "Unknown",
@@ -241,6 +257,7 @@
             this.cbForceObf.TabIndex = 1;
             this.cbForceObf.Text = "Force Obfuscator Detection";
             this.cbForceObf.UseVisualStyleBackColor = true;
+            this.cbForceObf.CheckedChanged += new System.EventHandler(this.cbForceObf_CheckedChanged);
             // 
             // cbNoRenaming
             // 
@@ -311,6 +328,7 @@
             // 
             this.tbDeobfPath64.Location = new System.Drawing.Point(8, 75);
             this.tbDeobfPath64.Name = "tbDeobfPath64";
+            this.tbDeobfPath64.ReadOnly = true;
             this.tbDeobfPath64.Size = new System.Drawing.Size(482, 20);
             this.tbDeobfPath64.TabIndex = 4;
             this.tbDeobfPath64.Text = "de4dot64.exe";
@@ -348,6 +366,7 @@
             // 
             this.tbDeobfPath.Location = new System.Drawing.Point(9, 36);
             this.tbDeobfPath.Name = "tbDeobfPath";
+            this.tbDeobfPath.ReadOnly = true;
             this.tbDeobfPath.Size = new System.Drawing.Size(482, 20);
             this.tbDeobfPath.TabIndex = 0;
             this.tbDeobfPath.Text = "de4dot.exe";
@@ -381,16 +400,6 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem1.Text = "Delete";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // cbUse64Bit
-            // 
-            this.cbUse64Bit.AutoSize = true;
-            this.cbUse64Bit.Location = new System.Drawing.Point(6, 66);
-            this.cbUse64Bit.Name = "cbUse64Bit";
-            this.cbUse64Bit.Size = new System.Drawing.Size(79, 17);
-            this.cbUse64Bit.TabIndex = 9;
-            this.cbUse64Bit.Text = "64bit Mode";
-            this.cbUse64Bit.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -438,7 +447,7 @@
         private System.Windows.Forms.Button btnDeobfuscate;
         private System.Windows.Forms.ListBox lbDecryptionMethods;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btn_AddDecryptionMethod;
+        private System.Windows.Forms.Button btnAddDecryptionMethod;
         private System.Windows.Forms.TextBox tbDecryptionMethod;
         private System.Windows.Forms.GroupBox gbGeneral;
         private System.Windows.Forms.ComboBox comboObfuscators;

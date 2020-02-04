@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace de4dot_gui
 {
@@ -50,6 +50,7 @@ namespace de4dot_gui
         #endregion "Drag&Drop Events"
 
         #region "Listbox controls"
+
         public void lbFilesToDeobfuscate_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -85,9 +86,10 @@ namespace de4dot_gui
             lbDecryptionMethods.Items.Add(tbDecryptionMethod.Text);
         }
 
-        #endregion
+        #endregion "Listbox controls"
 
         #region "Settings Tab"
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog browsePath = new OpenFileDialog())
@@ -95,7 +97,7 @@ namespace de4dot_gui
                 browsePath.Filter = "Executable files (*.exe)|*.exe";
 
                 if (browsePath.ShowDialog() == DialogResult.OK)
-                { 
+                {
                     tbDeobfPath.Text = browsePath.FileName;
                     Properties.Settings.Default.deobfPath = browsePath.FileName;
                 }
@@ -115,7 +117,8 @@ namespace de4dot_gui
                 }
             }
         }
-        #endregion
+
+        #endregion "Settings Tab"
 
         //Display warning when using emulation mode for string decryption
         private void comboDeobfMethod_SelectedIndexChanged(object sender, EventArgs e)
@@ -161,7 +164,6 @@ namespace de4dot_gui
                     MessageBox.Show("Please enter valid string decryption functions!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 foreach (string method in methods)
                     arguments += "--strtok " + method + " ";
-
             }
 
             if (cbUse64Bit.Checked)
@@ -170,7 +172,20 @@ namespace de4dot_gui
                 Process.Start(tbDeobfPath.Text, arguments);
 
             //MessageBox.Show(arguments);
+        }
 
+        private void cbEnableAdvStrings_CheckedChanged(object sender, EventArgs e)
+        {
+            bool enabled = cbEnableAdvStrings.Checked;
+            comboDeobfMethod.Enabled = enabled;
+            lbDecryptionMethods.Enabled = enabled;
+            tbDecryptionMethod.Enabled = enabled;
+            btnAddDecryptionMethod.Enabled = enabled;
+        }
+
+        private void cbForceObf_CheckedChanged(object sender, EventArgs e)
+        {
+            comboObfuscators.Enabled = cbForceObf.Checked;
         }
     }
 }
